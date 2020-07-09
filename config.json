@@ -1,5 +1,6 @@
 {
     "domain": "localhost",
+    "api_path": "/api/data",
     "port": 8000,
-    "trailor": 1
+    "trailor_id": 2
 }

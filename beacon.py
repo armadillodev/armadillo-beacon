@@ -6,15 +6,27 @@ from urllib.error import URLError
 import random
 import time
 
-domain = "localhost"
-api_path = "/api/data"
-port = 8000
+class Config:
+    def __init__(self, url, trailor_id):
+        self.url = url
+        self.trailor_id = trailor_id
 
-url = f'http://{domain}:{port}{api_path}'
-trailor_id = 1
+def read_conf():
+    with open('config.json') as file:
+        file_data = json.loads(file.read())
+
+        domain = file_data['domain']
+        api_path = file_data['api_path']
+        port = file_data['port']
+
+        config = Config(
+            f'http://{domain}:{port}{api_path}',
+            file_data['trailor_id']
+        )
+        return config
 
 
-def make_packet(temp):
+def make_packet(trailor_id, temp):
     data = {
         "trailor": trailor_id,
         "temperature": temp,
@@ -22,7 +34,7 @@ def make_packet(temp):
 
     return json.dumps(data)
 
-def send_data(data):
+def send_data(url, data):
     headers = {
         "Content-Type": "application/json",
     }
@@ -39,12 +51,16 @@ def get_random_temp():
 
 def main():
     print('starting armadillo beacon')
-    print(f'sending to: {url}')
+
+    config = read_conf()
+
+    print(f'sending to: {config.url}')
+    print(f'trailor id: {config.trailor_id}')
 
     while True:
         temp = get_random_temp()
-        data = make_packet(temp)
-        send_data(data)
+        data = make_packet(config.trailor_id, temp)
+        send_data(config.url, data)
         print(f'sent: "{data}"')
 
         time.sleep(1)
