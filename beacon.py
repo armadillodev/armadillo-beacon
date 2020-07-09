@@ -30,6 +30,7 @@ def send_data(data):
     try: 
         urllib.request.urlopen(req)
     except URLError as err:
+        print('failed to send data')
         print(err)
 
 def get_random_temp():
