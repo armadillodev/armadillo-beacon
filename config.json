@@ -1,6 +1,23 @@
 {
-    "domain": "localhost",
-    "api_path": "/api/data",
-    "port": 8000,
-    "trailor_id": 2
+    "servers": {
+        "local": {
+            "domain": "localhost",
+            "port": "8000",
+            "api_path": "/data"
+        },
+        "local-sever": {
+            "domain": "localhost",
+            "port": "8080",
+            "api_path": "/api/data"
+        },
+        "energi": {
+            "domain": "164.90.183.80",
+            "api_path": "/api/data",
+            "port": 80
+        }
+    },
+
+    "bikes": [
+        1
+    ]
 }
