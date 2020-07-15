@@ -5,9 +5,9 @@
             "port": "8000",
             "api_path": "/data"
         },
-        "local-sever": {
+        "local-server": {
             "domain": "localhost",
-            "port": "8080",
+            "port": "8000",
             "api_path": "/api/data"
         },
         "energi": {
